@@ -83,7 +83,7 @@ void glVertex3f( GLfloat x, GLfloat y, GLfloat z ) {
 	_numelements +=  1;	
 }
 
-GLAPI void GLAPIENTRY glVertex3fv(const GLfloat *v)
+void glVertex3fv(const GLfloat *v)
 {
     glVertex3f(v[0], v[1], v[2]);
 }
@@ -94,7 +94,7 @@ void glNormal3f( GLfloat x, GLfloat y, GLfloat z ){
 	_tempnormalelement.z = z;
 }
 
-GLAPI void GLAPIENTRY glNormal3fv(const GLfloat *v)
+void glNormal3fv(const GLfloat *v)
 {
     glNormal3f(v[0], v[1], v[2]);
 }
