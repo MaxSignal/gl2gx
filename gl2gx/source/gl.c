@@ -91,8 +91,7 @@ void glVertex3f( GLfloat x, GLfloat y, GLfloat z ) {
 	_numelements +=  1;	
 }
 
-void glVertex3fv(const GLfloat *v)
-{
+void glVertex3fv(const GLfloat *v) {
     glVertex3f(v[0], v[1], v[2]);
 }
 
@@ -102,22 +101,37 @@ void glNormal3f( GLfloat x, GLfloat y, GLfloat z ){
 	_tempnormalelement.z = z;
 }
 
-void glNormal3fv(const GLfloat *v)
-{
+void glNormal3fv(const GLfloat *v) {
     glNormal3f(v[0], v[1], v[2]);
 }
 
-void glColor3f( GLfloat r, GLfloat g, GLfloat b ) {
+void glColor4f( GLfloat r, GLfloat g, GLfloat b , GLfloat a) {
 	//store the vertex and keep index
 	_tempcolorelement.r = r;
 	_tempcolorelement.g = g;
 	_tempcolorelement.b = b;
-	_tempcolorelement.a = 0.0f;
+	_tempcolorelement.a = a;//TODO Alpha is not actually implemented yet
+}
+
+void glColor4fv( const GLfloat *v ) {
+    glColor4f(v[0], v[1], v[2], v[3]);
+}
+
+void glColor3f( GLfloat r, GLfloat g, GLfloat b ) {
+    glColor4f(r, g, b , 1.0f);
+}
+
+void glColor3fv( const GLfloat *v ) {
+    glColor4f(v[0], v[1], v[2], 1.0f);
 }
 
 void glTexCoord2f( GLfloat s, GLfloat t ){
 	_temptexcoordelement.s = s;
 	_temptexcoordelement.t = t;
+};
+
+void glTexCoord2fv(const GLfloat *v) {
+    glTexCoord2f(v[0], v[1]);
 };
 
 /* functions */
@@ -981,6 +995,25 @@ void glDisable(GLenum type){
 			case GL_LIGHT7: gxlightenabled[7]=false; break;
 			case GL_CULL_FACE: gxcullfaceanabled=false; break;
 		};
+}
+
+GLboolean glIsEnabled(GLenum type){
+		switch(type)
+		{
+			case GL_DEPTH_TEST: return depthtestenabled == GX_TRUE;
+			case GL_LIGHTING:
+				//TODO
+			case GL_LIGHT0: return gxlightenabled[0];
+			case GL_LIGHT1: return gxlightenabled[1];
+			case GL_LIGHT2: return gxlightenabled[2];
+			case GL_LIGHT3: return gxlightenabled[3];
+			case GL_LIGHT4: return gxlightenabled[4];
+			case GL_LIGHT5: return gxlightenabled[5];
+			case GL_LIGHT6: return gxlightenabled[6];
+			case GL_LIGHT7: return gxlightenabled[7];
+			case GL_CULL_FACE: return gxcullfaceanabled;
+		};
+        return false;//If invalid, return false
 }
 
 /* Depth Buffer */
