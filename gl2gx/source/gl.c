@@ -91,9 +91,11 @@ void glVertex3f( GLfloat x, GLfloat y, GLfloat z ) {
 	_numelements +=  1;	
 }
 
-void glVertex3fv(const GLfloat *v) {
+void glVertex3fv( const GLfloat *v ) {
     glVertex3f(v[0], v[1], v[2]);
 }
+
+/* glNormal */
 
 void glNormal3f( GLfloat x, GLfloat y, GLfloat z ){
 	_tempnormalelement.x = x;
@@ -101,9 +103,11 @@ void glNormal3f( GLfloat x, GLfloat y, GLfloat z ){
 	_tempnormalelement.z = z;
 }
 
-void glNormal3fv(const GLfloat *v) {
+void glNormal3fv( const GLfloat *v ) {
     glNormal3f(v[0], v[1], v[2]);
 }
+
+/* glColor */
 
 void glColor4f( GLfloat r, GLfloat g, GLfloat b , GLfloat a) {
 	//store the vertex and keep index
@@ -125,13 +129,25 @@ void glColor3fv( const GLfloat *v ) {
     glColor4f(v[0], v[1], v[2], 1.0f);
 }
 
+
+/* glTexCoord */
+
 void glTexCoord2f( GLfloat s, GLfloat t ){
 	_temptexcoordelement.s = s;
 	_temptexcoordelement.t = t;
 };
 
-void glTexCoord2fv(const GLfloat *v) {
+void glTexCoord2fv( const GLfloat *v ) {
     glTexCoord2f(v[0], v[1]);
+};
+
+void glTexCoord1f( GLfloat s ){
+	_temptexcoordelement.s = s;
+	_temptexcoordelement.t = 0.0f;
+};
+
+void glTexCoord1fv( const GLfloat *v ) {
+    glTexCoord2f(v[0], 0.0f);
 };
 
 /* functions */
