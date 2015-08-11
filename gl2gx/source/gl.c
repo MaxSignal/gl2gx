@@ -72,40 +72,109 @@ void  glPushMatrix (void){
 
 void glVertex3f( GLfloat x, GLfloat y, GLfloat z ) {
     //store the vertex and keep index
-    _vertexelements[_numelements].x = x;
-    _vertexelements[_numelements].y = y;
-    _vertexelements[_numelements].z = z;
+    _vertexelements[_numelements].x.f32 = x;
+    _vertexelements[_numelements].y.f32 = y;
+    _vertexelements[_numelements].z.f32 = z;
+    _vertexelements[_numelements].types = TypeElementf32;
 
     _colorelements[_numelements].r = _tempcolorelement.r;
     _colorelements[_numelements].g = _tempcolorelement.g;
     _colorelements[_numelements].b = _tempcolorelement.b;
     _colorelements[_numelements].a = _tempcolorelement.a;
 
-    _normalelements[_numelements].x = _tempnormalelement.x;
-    _normalelements[_numelements].y = _tempnormalelement.y;
-    _normalelements[_numelements].z = _tempnormalelement.z;
+    _normalelements[_numelements].x.f32 = _tempnormalelement.x.f32;
+    _normalelements[_numelements].y.f32 = _tempnormalelement.y.f32;
+    _normalelements[_numelements].z.f32 = _tempnormalelement.z.f32;
+    _normalelements[_numelements].types = _tempnormalelement.types;
 
-    _texcoordelements[_numelements].s = _temptexcoordelement.s;
-    _texcoordelements[_numelements].t = _temptexcoordelement.t;
+    _texcoordelements[_numelements].s.f32 = _temptexcoordelement.s.f32;
+    _texcoordelements[_numelements].t.f32 = _temptexcoordelement.t.f32;
+    _texcoordelements[_numelements].types = _temptexcoordelement.types;
 
-    _numelements +=  1;    
+    _numelements +=  1;
 }
 
-void glVertex3fv( const GLfloat *v ) {
-    glVertex3f(v[0], v[1], v[2]);
+void glVertex3d( GLdouble x, GLdouble y, GLdouble z ) {
+    //Double needs to just be cast to a float
+    glVertex3f( (GLfloat) x, (GLfloat) y, (GLfloat) z );
 }
+
+void glVertex3s( GLshort x, GLshort y, GLshort z ) {
+    //store the vertex and keep index
+    _vertexelements[_numelements].x.s16 = x;
+    _vertexelements[_numelements].y.s16 = y;
+    _vertexelements[_numelements].z.s16 = z;
+    _vertexelements[_numelements].types = TypeElements16;
+
+    _colorelements[_numelements].r = _tempcolorelement.r;
+    _colorelements[_numelements].g = _tempcolorelement.g;
+    _colorelements[_numelements].b = _tempcolorelement.b;
+    _colorelements[_numelements].a = _tempcolorelement.a;
+
+    _normalelements[_numelements].x.f32 = _tempnormalelement.x.f32;
+    _normalelements[_numelements].y.f32 = _tempnormalelement.y.f32;
+    _normalelements[_numelements].z.f32 = _tempnormalelement.z.f32;
+    _normalelements[_numelements].types = _tempnormalelement.types;
+
+    _texcoordelements[_numelements].s.f32 = _temptexcoordelement.s.f32;
+    _texcoordelements[_numelements].t.f32 = _temptexcoordelement.t.f32;
+    _texcoordelements[_numelements].types = _temptexcoordelement.types;
+
+    _numelements +=  1;
+}
+
+void glVertex3i( GLint x, GLint y, GLint z ) {
+    //4 byte  needs to just be cast to a short
+    glVertex3f( (GLint) x, (GLint) y, (GLint) z );
+}
+
+//Vector glVertex functions
+
+void glVertex3fv( const GLfloat *v ) { glVertex3f( v[0], v[1], v[2] ); }
+void glVertex3dv( const GLdouble *v ) { glVertex3d( v[0], v[1], v[2] ); }
+void glVertex3sv( const GLshort *v ) { glVertex3s( v[0], v[1], v[2] ); }
+void glVertex3iv( const GLint *v ) { glVertex3i( v[0], v[1], v[2] ); }
 
 /* glNormal */
 
 void glNormal3f( GLfloat x, GLfloat y, GLfloat z ){
-    _tempnormalelement.x = x;
-    _tempnormalelement.y = y;
-    _tempnormalelement.z = z;
+    _tempnormalelement.x.f32 = x;
+    _tempnormalelement.y.f32 = y;
+    _tempnormalelement.z.f32 = z;
+    _tempnormalelement.types = TypeElementf32;
 }
 
-void glNormal3fv( const GLfloat *v ) {
-    glNormal3f(v[0], v[1], v[2]);
+void glNormal3d( GLdouble x, GLdouble y, GLdouble z ){
+    //Double needs to just be cast to a float
+    glNormal3f( (GLfloat) x, (GLfloat) y, (GLfloat) z );
 }
+
+void glNormal3b( GLbyte x, GLbyte y, GLbyte z ){
+    _tempnormalelement.x.s8 = x;
+    _tempnormalelement.y.s8 = y;
+    _tempnormalelement.z.s8 = z;
+    _tempnormalelement.types = TypeElements8;
+}
+
+void glNormal3s( GLshort x, GLshort y, GLshort z ){
+    _tempnormalelement.x.s8 = x;
+    _tempnormalelement.y.s8 = y;
+    _tempnormalelement.z.s8 = z;
+    _tempnormalelement.types = TypeElements8;
+}
+
+void glNormal3i( GLint x, GLint y, GLint z ){
+    //4 byte  needs to just be cast to a short
+    glNormal3s( (GLshort) x, (GLshort) y, (GLshort) z );
+}
+
+//Vector glNormal functions
+
+void glNormal3fv( const GLfloat *v ) { glNormal3f(v[0], v[1], v[2]); }
+void glNormal3dv( const GLdouble *v ) { glNormal3d(v[0], v[1], v[2]); }
+void glNormal3bv( const GLbyte *v ) { glNormal3b(v[0], v[1], v[2]); }
+void glNormal3iv( const GLint *v ) { glNormal3i(v[0], v[1], v[2]); }
+void glNormal3sv( const GLshort *v ) { glNormal3s(v[0], v[1], v[2]); }
 
 /* glColor */
 //NOTE! GX ulimately uses u8's in it's GX_Color functions
@@ -248,8 +317,9 @@ void glColor4usv( const GLushort *v ) { glColor4us( v[0], v[1], v[2] , v[3] ); }
 /* glTexCoord */
 
 void glTexCoord2f( GLfloat s, GLfloat t ){
-    _temptexcoordelement.s = s;
-    _temptexcoordelement.t = t;
+    _temptexcoordelement.s.f32 = s;
+    _temptexcoordelement.t.f32 = t;
+    _temptexcoordelement.types = TypeElementf32;
 };
 
 void glTexCoord2fv( const GLfloat *v ) {
@@ -294,13 +364,35 @@ void glBegin(GLenum type) {
 }
 
 // Render a vertex to Gecko (used by glEnd)
-void UploadVertex(int index){    
-        GX_Position3f32( _vertexelements[index].x, _vertexelements[index].y, _vertexelements[index].z);    
-        GX_Normal3f32(_normalelements[index].x, _normalelements[index].y, _normalelements[index].z);
+void UploadVertex(int index){
+        //See it float or signed short
+        if( _vertexelements[index].types == TypeElementf32 )
+            GX_Position3f32( _vertexelements[index].x.f32, _vertexelements[index].y.f32, _vertexelements[index].z.f32);
+        else
+            GX_Position3s16( _vertexelements[index].x.s16, _vertexelements[index].y.s16, _vertexelements[index].z.s16);
+
+        //See it float, signed short or signed byte
+        switch( _normalelements[index].types )
+        {
+            case TypeElementf32:
+                GX_Normal3f32(_normalelements[index].x.f32, _normalelements[index].y.f32, _normalelements[index].z.f32);
+                break;
+            case TypeElements16:
+                GX_Normal3s16( _normalelements[index].x.s16, _normalelements[index].y.s16, _normalelements[index].z.s16);
+                break;
+            case TypeElements8:
+                GX_Normal3s8( _normalelements[index].x.s8, _normalelements[index].y.s8, _normalelements[index].z.s8);
+                break;
+        }
 
         //when using GL_FLAT only one color is allowed!!! //GL_SMOOTH allows for an color to be specified at each vertex
         GX_Color3u8( _colorelements[index].r, _colorelements[index].g, _colorelements[index].b); //glmaterialfv call instead when glcolormaterial call is used
-        GX_TexCoord2f32(_texcoordelements[index].s,_texcoordelements[index].t);
+
+        //See it float or signed short
+        if( _texcoordelements[index].types == TypeElementf32 )
+            GX_TexCoord2f32(_texcoordelements[index].s.f32,_texcoordelements[index].t.f32);
+        else
+            GX_TexCoord2s16( _texcoordelements[index].s.s16, _texcoordelements[index].t.s16);
 };
 
 void GX_TestInitSpecularDir(GXLightObj *lit_obj,f32 nx,f32 ny,f32 nz) { 
@@ -342,7 +434,8 @@ void glEnd(void) {
      GX_SetCullMode(GX_CULL_FRONT);
 
     Mtx mvi;
-    Mtx mv;
+    //Not used right now:
+    //Mtx mv;
     
 //    Mtx inversemodelview;
 
@@ -699,21 +792,24 @@ if(gxcullfaceanabled==true){
     i =0;
     for( i=0; i<_numelements; i++)
     {
-        _vertexelements[i].x = 0.0F;
-        _vertexelements[i].y = 0.0F;
-        _vertexelements[i].z = 0.0F;
+        _vertexelements[i].x.f32 = 0.0F;
+        _vertexelements[i].y.f32 = 0.0F;
+        _vertexelements[i].z.f32 = 0.0F;
+        _vertexelements[i].types = TypeElementf32;
 
-        _normalelements[i].x = 0.0F;
-        _normalelements[i].y = 0.0F;
-        _normalelements[i].z = 0.0F;
+        _normalelements[i].x.f32 = 0.0F;
+        _normalelements[i].y.f32 = 0.0F;
+        _normalelements[i].z.f32 = 0.0F;
+        _normalelements[i].types = TypeElementf32;
 
         _colorelements[i].r = 0;
         _colorelements[i].g = 0;
         _colorelements[i].b = 0;
         _colorelements[i].a = 255;
 
-        _texcoordelements[i].s = 0.0F;
-        _texcoordelements[i].t = 0.0F;
+        _texcoordelements[i].s.f32 = 0.0F;
+        _texcoordelements[i].t.f32 = 0.0F;
+        _texcoordelements[i].types = TypeElementf32;
 
     }
     _numelements =0;
@@ -772,7 +868,8 @@ void glLightfv( GLenum light, GLenum pname, const GLfloat *params ){
     };
 
     guVector lightPos={0.0F,0.0F,0.0F}; //TODO: make it opengl default light position
-    GXColor defcolor={0xFF,0xFF,0xFF,0xFF};
+    //Not used right now:
+    //GXColor defcolor={0xFF,0xFF,0xFF,0xFF};
     switch(pname)
     {
         case GL_POSITION: 
@@ -914,7 +1011,8 @@ void glEnable(GLenum type){
     u8 gxlightmask = 0x00000000;
     u8 gxlightmaskspec = 0x00000000;
     int lightcounter = 0;
-    int countlights =0;
+    //Not used right now
+    //int countlights =0;
 
         switch(type)
         {

@@ -17,18 +17,34 @@ typedef struct
 	float w;
 } VertexElement;
 
-typedef struct 
-{
-	float x;
-	float y;
-	float z;
-} NormalElement;
+//32bit element, with different types
+union TypeElement32{
+    float f32;
+    s16 s16;
+    s8 s8;
+};
 
 typedef struct 
 {
-	float s;
-	float t;
+	union TypeElement32 x;
+	union TypeElement32 y;
+	union TypeElement32 z;
+    //type of variables defined
+    u8 types;
+} xyzElement;
+
+typedef struct 
+{
+	union TypeElement32 s;
+	union TypeElement32 t;
+    //type of variables defined
+    u8 types;
 } TexCoordElement;
+
+//Types of variables defined for xyz and tex
+#define TypeElementf32 1
+#define TypeElements16 2
+#define TypeElements8 3
 
 typedef struct 
 {
@@ -38,13 +54,13 @@ typedef struct
 	float a;
 } GXColorf;
 
-NormalElement _tempnormalelement;
+xyzElement _tempnormalelement;
 TexCoordElement _temptexcoordelement;
 GXColor _tempcolorelement;
 
 //TODO: integrate in normal, vertex, texcoord and color in struct and place that in dynamic arrray
-NormalElement _normalelements[MAX_ARRAY]; //TODO: dynamic
-NormalElement _vertexelements[MAX_ARRAY]; //TODO: dynamic
+xyzElement _normalelements[MAX_ARRAY]; //TODO: dynamic
+xyzElement _vertexelements[MAX_ARRAY]; //TODO: dynamic
 TexCoordElement _texcoordelements[MAX_ARRAY]; //TODO: dynamic
 GXColor _colorelements[MAX_ARRAY]; //TODO: dynamic
 
