@@ -19,6 +19,13 @@ typedef struct
 
 typedef struct 
 {
+	float x;
+	float y;
+	float z;
+} NormalElement;
+
+typedef struct 
+{
 	float s;
 	float t;
 } TexCoordElement;
@@ -31,13 +38,13 @@ typedef struct
 	float a;
 } GXColorf;
 
-VertexElement _tempnormalelement;
+NormalElement _tempnormalelement;
 TexCoordElement _temptexcoordelement;
 GXColor _tempcolorelement;
 
 //TODO: integrate in normal, vertex, texcoord and color in struct and place that in dynamic arrray
-VertexElement _normalelements[MAX_ARRAY]; //TODO: dynamic
-VertexElement _vertexelements[MAX_ARRAY]; //TODO: dynamic
+NormalElement _normalelements[MAX_ARRAY]; //TODO: dynamic
+NormalElement _vertexelements[MAX_ARRAY]; //TODO: dynamic
 TexCoordElement _texcoordelements[MAX_ARRAY]; //TODO: dynamic
 GXColor _colorelements[MAX_ARRAY]; //TODO: dynamic
 
