@@ -320,35 +320,39 @@ void glTexCoord2f( GLfloat s, GLfloat t ){
     _temptexcoordelement.s.f32 = s;
     _temptexcoordelement.t.f32 = t;
     _temptexcoordelement.types = TypeElementf32;
-};
-
-void glTexCoord2fv( const GLfloat *v ) {
-    glTexCoord2f( v[0], v[1] );
-};
-
-void glTexCoord1f( GLfloat s ){
-    glTexCoord2f( s, 0.0f );
-};
-
-void glTexCoord1fv( const GLfloat *v ) {
-    glTexCoord2f( v[0], 0.0f );
-};
+}
 
 void glTexCoord2d( GLdouble s, GLdouble t ){
     glTexCoord2f( (GLfloat) s, (GLfloat) t );
-};
+}
 
-void glTexCoord2dv( const GLdouble *v ) {
-    glTexCoord2f( (GLfloat) v[0], (GLfloat) v[1] );
-};
+void glTexCoord2s( GLshort s, GLshort t ){
+    _temptexcoordelement.s.s16 = s;
+    _temptexcoordelement.t.s16 = t;
+    _temptexcoordelement.types = TypeElements16;
+}
 
-void glTexCoord1d( GLdouble s ){
-    glTexCoord2f( (GLfloat) s, 0.0f );
-};
+void glTexCoord2i( GLint s, GLint t ){
+    glTexCoord2s( (GLshort) s, (GLshort) t );
+}
 
-void glTexCoord1dv( const GLdouble *v ) {
-    glTexCoord2f( (GLfloat) v[0], 0.0f );
-};
+//Vector glTexCoord1* functions (t is assumed to be 0)
+
+void glTexCoord1f( GLfloat s ) { glTexCoord2f( s, 0.0f ); };
+void glTexCoord1d( GLdouble s ) { glTexCoord2d( s, 0.0f ); };
+void glTexCoord1s( GLshort s ) { glTexCoord2s( s, 0 ); };
+void glTexCoord1i( GLint s ) { glTexCoord2i( s, 0 ); };
+
+//Vector glTexCoord functions
+
+void glTexCoord2fv( const GLfloat *v ) { glTexCoord2f( v[0], v[1] ); };
+void glTexCoord2dv( const GLdouble *v ) { glTexCoord2d( v[0], v[1] ); };
+void glTexCoord2sv( const GLshort *v ) { glTexCoord2s( v[0], v[1] ); };
+void glTexCoord2iv( const GLint *v ) { glTexCoord2i( v[0], v[1] ); };
+void glTexCoord1fv( const GLfloat *v ) { glTexCoord2f( v[0], 0.0f ); };
+void glTexCoord1dv( const GLdouble *v ) { glTexCoord2d( v[0], 0.0f ); };
+void glTexCoord1sv( const GLshort *v ) { glTexCoord2s( v[0], 0 ); };
+void glTexCoord1iv( const GLint *v ) { glTexCoord2i( v[0], 0 ); };
 
 /* functions */
 void glBegin(GLenum type) {
