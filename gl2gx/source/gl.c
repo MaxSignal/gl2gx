@@ -12,6 +12,7 @@
 
 GXColor _clearcolor = {0, 0, 0, 0xff};
 GXRModeObj *rmode;
+GLboolean LightingEnabled = false;
 
 //textures need to be 4x4 tiles
 
@@ -1190,6 +1191,7 @@ GX_SetTevColorIn(GX_TEVSTAGE3,GX_CC_ZERO,GX_CC_RASC,GX_CC_ONE,GX_CC_CPREV);
 
                 }   
 
+                LightingEnabled = true;
                 break;
             case GL_TEXTURE_2D:
                 tex2denabled = true;
@@ -1226,6 +1228,7 @@ void glDisable(GLenum type){
                  GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
                  GX_SetChanCtrl(GX_COLOR0A0,GX_DISABLE,GX_SRC_REG,GX_SRC_VTX,GX_LIGHTNULL,GX_DF_NONE,GX_AF_NONE);
                 }
+                LightingEnabled = false;
                 break;
             case GL_TEXTURE_2D:
                 tex2denabled = false;
@@ -1249,8 +1252,7 @@ GLboolean glIsEnabled(GLenum type){
         switch(type)
         {
             case GL_DEPTH_TEST: return depthtestenabled == GX_TRUE;
-            case GL_LIGHTING:
-                //TODO
+            case GL_LIGHTING: return LightingEnabled;
             case GL_LIGHT0: return gxlightenabled[0];
             case GL_LIGHT1: return gxlightenabled[1];
             case GL_LIGHT2: return gxlightenabled[2];
