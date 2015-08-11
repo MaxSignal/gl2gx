@@ -299,7 +299,7 @@ void UploadVertex(int index){
         GX_Normal3f32(_normalelements[index].x, _normalelements[index].y, _normalelements[index].z);
 
         //when using GL_FLAT only one color is allowed!!! //GL_SMOOTH allows for an color to be specified at each vertex
-        GX_Color4u8( _colorelements[index].r, _colorelements[index].g, _colorelements[index].b, _colorelements[index].a); //glmaterialfv call instead when glcolormaterial call is used
+        GX_Color3u8( _colorelements[index].r, _colorelements[index].g, _colorelements[index].b); //glmaterialfv call instead when glcolormaterial call is used
         GX_TexCoord2f32(_texcoordelements[index].s,_texcoordelements[index].t);
 };
 
@@ -707,10 +707,10 @@ if(gxcullfaceanabled==true){
         _normalelements[i].y = 0.0F;
         _normalelements[i].z = 0.0F;
 
-        _colorelements[i].r = 0.0F;
-        _colorelements[i].g = 0.0F;
-        _colorelements[i].b = 0.0F;
-        _colorelements[i].a = 0.0F;
+        _colorelements[i].r = 0;
+        _colorelements[i].g = 0;
+        _colorelements[i].b = 0;
+        _colorelements[i].a = 255;
 
         _texcoordelements[i].s = 0.0F;
         _texcoordelements[i].t = 0.0F;
