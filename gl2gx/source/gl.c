@@ -108,27 +108,122 @@ void glNormal3fv( const GLfloat *v ) {
 }
 
 /* glColor */
+//NOTE! GX ulimately uses u8's in it's GX_Color functions
+//and truncates automatically, so we might as well
+//truncate early to avoid using wasteful 16/32bit variables
 
-void glColor4f( GLfloat r, GLfloat g, GLfloat b , GLfloat a) {
+void glColor4ub( GLubyte r, GLubyte g, GLubyte b, GLubyte a ){
 	//store the vertex and keep index
 	_tempcolorelement.r = r;
 	_tempcolorelement.g = g;
 	_tempcolorelement.b = b;
-	_tempcolorelement.a = a;//TODO Alpha is not actually implemented yet
+	_tempcolorelement.a = a;
 }
 
-void glColor4fv( const GLfloat *v ) {
-    glColor4f(v[0], v[1], v[2], v[3]);
+void glColor4b( GLbyte r, GLbyte g, GLbyte b, GLbyte a ){
+    //Signed numbers are a little tricky, we need to set all
+    //negatives to 0, and remove the sign bit by one shift left
+    //The LSB is duplicated as an approximation of 7bit to 8bit
+	glColor4ub( r<0 ? 0 : (GLubyte) ( ( r << 1 ) | ( r & 1 ) ),
+                g<0 ? 0 : (GLubyte) ( ( g << 1 ) | ( g & 1 ) ),
+                b<0 ? 0 : (GLubyte) ( ( b << 1 ) | ( b & 1 ) ),
+                a<0 ? 0 : (GLubyte) ( ( a << 1 ) | ( a & 1 ) ) );
 }
 
-void glColor3f( GLfloat r, GLfloat g, GLfloat b ) {
-    glColor4f(r, g, b , 1.0f);
+void glColor4us( GLushort r, GLushort g, GLushort b, GLushort a ){
+    //This works because PPC is big endian, no shifting needed!
+	glColor4ub( (GLubyte) r, (GLubyte) g,
+                (GLubyte) b, (GLubyte) a );
 }
 
-void glColor3fv( const GLfloat *v ) {
-    glColor4f(v[0], v[1], v[2], 1.0f);
+void glColor4s( GLshort r, GLshort g, GLshort b, GLshort a ){
+    //Signed numbers are a little tricky, we need to set all
+    //negatives to 0, and remove the sign bit by one shift left
+	glColor4ub( r<0 ? 0 : (GLubyte) ( r << 1 ),
+                g<0 ? 0 : (GLubyte) ( g << 1 ),
+                b<0 ? 0 : (GLubyte) ( b << 1 ),
+                a<0 ? 0 : (GLubyte) ( a << 1 ) );
 }
 
+void glColor4ui( GLuint r, GLuint g, GLuint b, GLuint a ){
+    //This works because PPC is big endian, no shifting needed!
+	glColor4ub( (GLubyte) r, (GLubyte) g,
+                (GLubyte) b, (GLubyte) a );
+}
+
+void glColor4i( GLint r, GLint g, GLint b, GLint a ){
+    //Signed numbers are a little tricky, we need to set all
+    //negatives to 0, and remove the sign bit by one shift left
+	glColor4ub( r<0 ? 0 : (GLubyte) ( r << 1 ),
+                g<0 ? 0 : (GLubyte) ( g << 1 ),
+                b<0 ? 0 : (GLubyte) ( b << 1 ),
+                a<0 ? 0 : (GLubyte) ( a << 1 ) );
+}
+
+void glColor4d( GLdouble r, GLdouble g, GLdouble b, GLdouble a ){
+    //Simular to before, but convert from 0.0f to 1.0f into 0 to 255
+	glColor4ub( (GLubyte) ( 255.0 * r ), (GLubyte) ( 255.0 * g ),
+                (GLubyte) ( 255.0 * b ), (GLubyte) ( 255.0 * a ) );
+}
+
+void glColor4f( GLfloat r, GLfloat g, GLfloat b, GLfloat a ){
+    //Same idea as the doubles, convert from 0.0f to 1.0f into 0 to 255
+	glColor4ub( (GLubyte) ( 255.0 * r ), (GLubyte) ( 255.0 * g ),
+                (GLubyte) ( 255.0 * b ), (GLubyte) ( 255.0 * a ) );
+}
+
+void glColor3ub( GLubyte r, GLubyte g, GLubyte b ){
+    //Call original function, but assume a is 100%, or 255
+	glColor4ub( r, g, b, 255 );
+}
+
+void glColor3b( GLbyte r, GLbyte g, GLbyte b ){
+    //Signed numbers are a little tricky, we need to set all
+    //negatives to 0, and remove the sign bit by one shift left
+    //The LSB is duplicated as an approximation of 7bit to 8bit
+	glColor3ub( r<0 ? 0 : (GLubyte) ( ( r << 1 ) | ( r & 1 ) ),
+                g<0 ? 0 : (GLubyte) ( ( g << 1 ) | ( g & 1 ) ),
+                b<0 ? 0 : (GLubyte) ( ( b << 1 ) | ( b & 1 ) ) );
+}
+
+void glColor3us( GLushort r, GLushort g, GLushort b ){
+    //This works because PPC is big endian, no shifting needed!
+	glColor3ub( (GLubyte) r, (GLubyte) g,
+                (GLubyte) b );
+}
+
+void glColor3s( GLshort r, GLshort g, GLshort b ){
+    //Signed numbers are a little tricky, we need to set all
+    //negatives to 0, and remove the sign bit by one shift left
+	glColor3ub( r<0 ? 0 : (GLubyte) ( r << 1 ),
+                g<0 ? 0 : (GLubyte) ( g << 1 ),
+                b<0 ? 0 : (GLubyte) ( b << 1 ) );
+}
+
+void glColor3ui( GLuint r, GLuint g, GLuint b ){
+    //This works because PPC is big endian, no shifting needed!
+	glColor3ub( (GLubyte) r, (GLubyte) g,
+                (GLubyte) b );
+}
+
+void glColor3i( GLint r, GLint g, GLint b ){
+    //Signed numbers are a little tricky, we need to set all
+    //negatives to 0, and remove the sign bit by one shift left
+	glColor3ub( r<0 ? 0 : (GLubyte) ( r << 1 ),
+                g<0 ? 0 : (GLubyte) ( g << 1 ),
+                b<0 ? 0 : (GLubyte) ( b << 1 ) );
+}
+
+void glColor3d( GLdouble r, GLdouble g, GLdouble b ){
+	glColor3ub( (GLubyte) ( 255.0 * r ), (GLubyte) ( 255.0 * g ),
+                (GLubyte) ( 255.0 * b ) );
+}
+
+void glColor3f( GLfloat r, GLfloat g, GLfloat b ){
+    //Simular to before, but convert from 0.0f to 1.0f into 0 to 255
+	glColor3ub( (GLubyte) ( 255.0 * r ), (GLubyte) ( 255.0 * g ),
+                (GLubyte) ( 255.0 * b ) );
+}
 
 /* glTexCoord */
 
@@ -169,7 +264,7 @@ void UploadVertex(int index){
         GX_Normal3f32(_normalelements[index].x, _normalelements[index].y, _normalelements[index].z);
 
 		//when using GL_FLAT only one color is allowed!!! //GL_SMOOTH allows for an color to be specified at each vertex
-		GX_Color3f32( _colorelements[index].r, _colorelements[index].g, _colorelements[index].b); //glmaterialfv call instead when glcolormaterial call is used
+		GX_Color4u8( _colorelements[index].r, _colorelements[index].g, _colorelements[index].b, _colorelements[index].a); //glmaterialfv call instead when glcolormaterial call is used
 		GX_TexCoord2f32(_texcoordelements[index].s,_texcoordelements[index].t);
 };
 

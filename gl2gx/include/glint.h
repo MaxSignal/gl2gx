@@ -33,13 +33,13 @@ typedef struct
 
 VertexElement _tempnormalelement;
 TexCoordElement _temptexcoordelement;
-GXColorf _tempcolorelement;
+GXColor _tempcolorelement;
 
 //TODO: integrate in normal, vertex, texcoord and color in struct and place that in dynamic arrray
 VertexElement _normalelements[MAX_ARRAY]; //TODO: dynamic
 VertexElement _vertexelements[MAX_ARRAY]; //TODO: dynamic
 TexCoordElement _texcoordelements[MAX_ARRAY]; //TODO: dynamic
-GXColorf _colorelements[MAX_ARRAY]; //TODO: dynamic
+GXColor _colorelements[MAX_ARRAY]; //TODO: dynamic
 
 int _numelements;
 int _type;
