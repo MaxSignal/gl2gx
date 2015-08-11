@@ -92,7 +92,7 @@ void glVertex3f( GLfloat x, GLfloat y, GLfloat z ) {
 }
 
 void glVertex3fv( const GLfloat *v ) {
-    glVertex3f(v[0], v[1], v[2]);
+	glVertex3f(v[0], v[1], v[2]);
 }
 
 /* glNormal */
@@ -104,7 +104,7 @@ void glNormal3f( GLfloat x, GLfloat y, GLfloat z ){
 }
 
 void glNormal3fv( const GLfloat *v ) {
-    glNormal3f(v[0], v[1], v[2]);
+	glNormal3f(v[0], v[1], v[2]);
 }
 
 /* glColor */
@@ -121,108 +121,108 @@ void glColor4ub( GLubyte r, GLubyte g, GLubyte b, GLubyte a ){
 }
 
 void glColor4b( GLbyte r, GLbyte g, GLbyte b, GLbyte a ){
-    //Signed numbers are a little tricky, we need to set all
-    //negatives to 0, and remove the sign bit by one shift left
-    //The LSB is duplicated as an approximation of 7bit to 8bit
+	//Signed numbers are a little tricky, we need to set all
+	//negatives to 0, and remove the sign bit by one shift left
+	//The LSB is duplicated as an approximation of 7bit to 8bit
 	glColor4ub( r<0 ? 0 : (GLubyte) ( ( r << 1 ) | ( r & 1 ) ),
-                g<0 ? 0 : (GLubyte) ( ( g << 1 ) | ( g & 1 ) ),
-                b<0 ? 0 : (GLubyte) ( ( b << 1 ) | ( b & 1 ) ),
-                a<0 ? 0 : (GLubyte) ( ( a << 1 ) | ( a & 1 ) ) );
+				g<0 ? 0 : (GLubyte) ( ( g << 1 ) | ( g & 1 ) ),
+				b<0 ? 0 : (GLubyte) ( ( b << 1 ) | ( b & 1 ) ),
+				a<0 ? 0 : (GLubyte) ( ( a << 1 ) | ( a & 1 ) ) );
 }
 
 void glColor4us( GLushort r, GLushort g, GLushort b, GLushort a ){
-    //This works because PPC is big endian, no shifting needed!
+	//This works because PPC is big endian, no shifting needed!
 	glColor4ub( (GLubyte) r, (GLubyte) g,
-                (GLubyte) b, (GLubyte) a );
+				(GLubyte) b, (GLubyte) a );
 }
 
 void glColor4s( GLshort r, GLshort g, GLshort b, GLshort a ){
-    //Signed numbers are a little tricky, we need to set all
-    //negatives to 0, and remove the sign bit by one shift left
+	//Signed numbers are a little tricky, we need to set all
+	//negatives to 0, and remove the sign bit by one shift left
 	glColor4ub( r<0 ? 0 : (GLubyte) ( r << 1 ),
-                g<0 ? 0 : (GLubyte) ( g << 1 ),
-                b<0 ? 0 : (GLubyte) ( b << 1 ),
-                a<0 ? 0 : (GLubyte) ( a << 1 ) );
+				g<0 ? 0 : (GLubyte) ( g << 1 ),
+				b<0 ? 0 : (GLubyte) ( b << 1 ),
+				a<0 ? 0 : (GLubyte) ( a << 1 ) );
 }
 
 void glColor4ui( GLuint r, GLuint g, GLuint b, GLuint a ){
-    //This works because PPC is big endian, no shifting needed!
+	//This works because PPC is big endian, no shifting needed!
 	glColor4ub( (GLubyte) r, (GLubyte) g,
-                (GLubyte) b, (GLubyte) a );
+				(GLubyte) b, (GLubyte) a );
 }
 
 void glColor4i( GLint r, GLint g, GLint b, GLint a ){
-    //Signed numbers are a little tricky, we need to set all
-    //negatives to 0, and remove the sign bit by one shift left
+	//Signed numbers are a little tricky, we need to set all
+	//negatives to 0, and remove the sign bit by one shift left
 	glColor4ub( r<0 ? 0 : (GLubyte) ( r << 1 ),
-                g<0 ? 0 : (GLubyte) ( g << 1 ),
-                b<0 ? 0 : (GLubyte) ( b << 1 ),
-                a<0 ? 0 : (GLubyte) ( a << 1 ) );
+				g<0 ? 0 : (GLubyte) ( g << 1 ),
+				b<0 ? 0 : (GLubyte) ( b << 1 ),
+				a<0 ? 0 : (GLubyte) ( a << 1 ) );
 }
 
 void glColor4d( GLdouble r, GLdouble g, GLdouble b, GLdouble a ){
-    //Simular to before, but convert from 0.0f to 1.0f into 0 to 255
+	//Simular to before, but convert from 0.0f to 1.0f into 0 to 255
 	glColor4ub( (GLubyte) ( 255.0 * r ), (GLubyte) ( 255.0 * g ),
-                (GLubyte) ( 255.0 * b ), (GLubyte) ( 255.0 * a ) );
+				(GLubyte) ( 255.0 * b ), (GLubyte) ( 255.0 * a ) );
 }
 
 void glColor4f( GLfloat r, GLfloat g, GLfloat b, GLfloat a ){
-    //Same idea as the doubles, convert from 0.0f to 1.0f into 0 to 255
+	//Same idea as the doubles, convert from 0.0f to 1.0f into 0 to 255
 	glColor4ub( (GLubyte) ( 255.0 * r ), (GLubyte) ( 255.0 * g ),
-                (GLubyte) ( 255.0 * b ), (GLubyte) ( 255.0 * a ) );
+				(GLubyte) ( 255.0 * b ), (GLubyte) ( 255.0 * a ) );
 }
 
 void glColor3ub( GLubyte r, GLubyte g, GLubyte b ){
-    //Call original function, but assume a is 100%, or 255
+	//Call original function, but assume a is 100%, or 255
 	glColor4ub( r, g, b, 255 );
 }
 
 void glColor3b( GLbyte r, GLbyte g, GLbyte b ){
-    //Signed numbers are a little tricky, we need to set all
-    //negatives to 0, and remove the sign bit by one shift left
-    //The LSB is duplicated as an approximation of 7bit to 8bit
+	//Signed numbers are a little tricky, we need to set all
+	//negatives to 0, and remove the sign bit by one shift left
+	//The LSB is duplicated as an approximation of 7bit to 8bit
 	glColor3ub( r<0 ? 0 : (GLubyte) ( ( r << 1 ) | ( r & 1 ) ),
-                g<0 ? 0 : (GLubyte) ( ( g << 1 ) | ( g & 1 ) ),
-                b<0 ? 0 : (GLubyte) ( ( b << 1 ) | ( b & 1 ) ) );
+				g<0 ? 0 : (GLubyte) ( ( g << 1 ) | ( g & 1 ) ),
+				b<0 ? 0 : (GLubyte) ( ( b << 1 ) | ( b & 1 ) ) );
 }
 
 void glColor3us( GLushort r, GLushort g, GLushort b ){
-    //This works because PPC is big endian, no shifting needed!
+	//This works because PPC is big endian, no shifting needed!
 	glColor3ub( (GLubyte) r, (GLubyte) g,
-                (GLubyte) b );
+				(GLubyte) b );
 }
 
 void glColor3s( GLshort r, GLshort g, GLshort b ){
-    //Signed numbers are a little tricky, we need to set all
-    //negatives to 0, and remove the sign bit by one shift left
+	//Signed numbers are a little tricky, we need to set all
+	//negatives to 0, and remove the sign bit by one shift left
 	glColor3ub( r<0 ? 0 : (GLubyte) ( r << 1 ),
-                g<0 ? 0 : (GLubyte) ( g << 1 ),
-                b<0 ? 0 : (GLubyte) ( b << 1 ) );
+				g<0 ? 0 : (GLubyte) ( g << 1 ),
+				b<0 ? 0 : (GLubyte) ( b << 1 ) );
 }
 
 void glColor3ui( GLuint r, GLuint g, GLuint b ){
-    //This works because PPC is big endian, no shifting needed!
+	//This works because PPC is big endian, no shifting needed!
 	glColor3ub( (GLubyte) r, (GLubyte) g,
-                (GLubyte) b );
+				(GLubyte) b );
 }
 
 void glColor3i( GLint r, GLint g, GLint b ){
-    //Signed numbers are a little tricky, we need to set all
-    //negatives to 0, and remove the sign bit by one shift left
+	//Signed numbers are a little tricky, we need to set all
+	//negatives to 0, and remove the sign bit by one shift left
 	glColor3ub( r<0 ? 0 : (GLubyte) ( r << 1 ),
-                g<0 ? 0 : (GLubyte) ( g << 1 ),
-                b<0 ? 0 : (GLubyte) ( b << 1 ) );
+				g<0 ? 0 : (GLubyte) ( g << 1 ),
+				b<0 ? 0 : (GLubyte) ( b << 1 ) );
 }
 
 void glColor3d( GLdouble r, GLdouble g, GLdouble b ){
 	glColor3ub( (GLubyte) ( 255.0 * r ), (GLubyte) ( 255.0 * g ),
-                (GLubyte) ( 255.0 * b ) );
+				(GLubyte) ( 255.0 * b ) );
 }
 
 void glColor3f( GLfloat r, GLfloat g, GLfloat b ){
-    //Simular to before, but convert from 0.0f to 1.0f into 0 to 255
+	//Simular to before, but convert from 0.0f to 1.0f into 0 to 255
 	glColor3ub( (GLubyte) ( 255.0 * r ), (GLubyte) ( 255.0 * g ),
-                (GLubyte) ( 255.0 * b ) );
+				(GLubyte) ( 255.0 * b ) );
 }
 
 //Vector glColor functions
@@ -253,7 +253,7 @@ void glTexCoord2f( GLfloat s, GLfloat t ){
 };
 
 void glTexCoord2fv( const GLfloat *v ) {
-    glTexCoord2f( v[0], v[1] );
+	glTexCoord2f( v[0], v[1] );
 };
 
 void glTexCoord1f( GLfloat s ){
@@ -261,7 +261,7 @@ void glTexCoord1f( GLfloat s ){
 };
 
 void glTexCoord1fv( const GLfloat *v ) {
-    glTexCoord2f( v[0], 0.0f );
+	glTexCoord2f( v[0], 0.0f );
 };
 
 void glTexCoord2d( GLdouble s, GLdouble t ){
@@ -269,7 +269,7 @@ void glTexCoord2d( GLdouble s, GLdouble t ){
 };
 
 void glTexCoord2dv( const GLdouble *v ) {
-    glTexCoord2f( (GLfloat) v[0], (GLfloat) v[1] );
+	glTexCoord2f( (GLfloat) v[0], (GLfloat) v[1] );
 };
 
 void glTexCoord1d( GLdouble s ){
@@ -277,7 +277,7 @@ void glTexCoord1d( GLdouble s ){
 };
 
 void glTexCoord1dv( const GLdouble *v ) {
-    glTexCoord2f( (GLfloat) v[0], 0.0f );
+	glTexCoord2f( (GLfloat) v[0], 0.0f );
 };
 
 /* functions */
@@ -286,7 +286,7 @@ void glBegin(GLenum type) {
 	//store the type
 	switch(type)
 	{
-        case GL_TRIANGLE_STRIP: _type = GX_TRIANGLESTRIP; break;        
+		case GL_TRIANGLE_STRIP: _type = GX_TRIANGLESTRIP; break;		
 		case GL_TRIANGLES: _type = GX_TRIANGLES; break;
 		case GL_QUADS: _type = GX_QUADS; break;
 		case GL_LINES: _type = GL_LINES; break;
@@ -294,9 +294,9 @@ void glBegin(GLenum type) {
 }
 
 // Render a vertex to Gecko (used by glEnd)
-void UploadVertex(int index){    
+void UploadVertex(int index){	
 		GX_Position3f32( _vertexelements[index].x, _vertexelements[index].y, _vertexelements[index].z);	
-        GX_Normal3f32(_normalelements[index].x, _normalelements[index].y, _normalelements[index].z);
+		GX_Normal3f32(_normalelements[index].x, _normalelements[index].y, _normalelements[index].z);
 
 		//when using GL_FLAT only one color is allowed!!! //GL_SMOOTH allows for an color to be specified at each vertex
 		GX_Color4u8( _colorelements[index].r, _colorelements[index].g, _colorelements[index].b, _colorelements[index].a); //glmaterialfv call instead when glcolormaterial call is used
@@ -304,32 +304,32 @@ void UploadVertex(int index){
 };
 
 void GX_TestInitSpecularDir(GXLightObj *lit_obj,f32 nx,f32 ny,f32 nz) { 
-     //f32 px, py, pz;
-      f32 hx, hy, hz, mag;  
-     // Compute half-angle vector 
-     hx = -nx;
-     hy = -ny; 
-     hz = (-nz + 1.0f); 
-     mag = 1.0f / sqrtf((hx * hx) + (hy * hy) + (hz * hz)); 
-     hx *= mag; 
-     hy *= mag; 
-     hz *= mag;  
-     
-     //px = -nx * BIG_NUMBER; 
-     //py = -ny * BIG_NUMBER; 
-     //pz = -nz * BIG_NUMBER;  
-     //((f32*)lit_obj)[10] = px; 
-     //((f32*)lit_obj)[11] = py; 
-     //((f32*)lit_obj)[12] = pz; 
-     ((f32*)lit_obj)[13] = hx; 
-     ((f32*)lit_obj)[14] = hy; 
-     ((f32*)lit_obj)[15] = hz;
+	 //f32 px, py, pz;
+	  f32 hx, hy, hz, mag;  
+	 // Compute half-angle vector 
+	 hx = -nx;
+	 hy = -ny; 
+	 hz = (-nz + 1.0f); 
+	 mag = 1.0f / sqrtf((hx * hx) + (hy * hy) + (hz * hz)); 
+	 hx *= mag; 
+	 hy *= mag; 
+	 hz *= mag;  
+	 
+	 //px = -nx * BIG_NUMBER; 
+	 //py = -ny * BIG_NUMBER; 
+	 //pz = -nz * BIG_NUMBER;  
+	 //((f32*)lit_obj)[10] = px; 
+	 //((f32*)lit_obj)[11] = py; 
+	 //((f32*)lit_obj)[12] = pz; 
+	 ((f32*)lit_obj)[13] = hx; 
+	 ((f32*)lit_obj)[14] = hy; 
+	 ((f32*)lit_obj)[15] = hz;
 } 
 
 void GX_TestInitLightShininess(GXLightObj *lobj, f32 shininess) {
 
    shininess = (shininess / 128) * 256; //convert opengl range to gx
-   GX_InitLightAttn(lobj, 1.0, 0.0, 2.0, (shininess)*0.5, 0.0, 1.0F-(shininess)*0.5 );      
+   GX_InitLightAttn(lobj, 1.0, 0.0, 2.0, (shininess)*0.5, 0.0, 1.0F-(shininess)*0.5 );	  
 
 //Redshade
 //math behind a and k is [a0 + a1^2 + a2^3], brightness as you go away from the center, [or brightness as you go away from source in k
@@ -338,8 +338,8 @@ void GX_TestInitLightShininess(GXLightObj *lobj, f32 shininess) {
 }
 
 void glEnd(void) {
-     
-     GX_SetCullMode(GX_CULL_FRONT);
+	 
+	 GX_SetCullMode(GX_CULL_FRONT);
 
 	Mtx mvi;
 	Mtx mv;
@@ -351,9 +351,9 @@ void glEnd(void) {
 	GX_LoadPosMtxImm(modelview, GX_PNMTX0);
 
 	//for normals first calculate normal matrix (thanks shagkur)
-    guMtxInverse(modelview,mvi); 
-    guMtxTranspose(mvi,modelview); 
-    GX_LoadNrmMtxImm(modelview,GX_PNMTX0); //experimtal leave out (hmm works good?)
+	guMtxInverse(modelview,mvi); 
+	guMtxTranspose(mvi,modelview); 
+	GX_LoadNrmMtxImm(modelview,GX_PNMTX0); //experimtal leave out (hmm works good?)
 
 
 	//use global ambient light together with current material ambient and add emissive material color
@@ -392,9 +392,9 @@ void glEnd(void) {
 
 		if(gxlightenabled[lightcounter]){ //when light is enabled
 
-            //somewhere here an error happens?
+			//somewhere here an error happens?
 
-            //Setup mat/light ambient color 
+			//Setup mat/light ambient color 
 			gxchanambient.r = ((gxchanambient.r * gxlightambientcolor[lightcounter].r) * 0xFF);
 			gxchanambient.g = ((gxchanambient.g * gxlightambientcolor[lightcounter].g) * 0xFF);
 			gxchanambient.b = ((gxchanambient.b * gxlightambientcolor[lightcounter].b) * 0xFF);
@@ -417,202 +417,202 @@ void glEnd(void) {
 			gxchanspecular.a = (gxchanspecular.a * gxlightspecularcolor[lightcounter].a) * 0xFF;
 			GX_SetChanMatColor(GX_COLOR1A1, gxchanspecular); // use red as test color
 
-            //Setup light diffuse color
-            GXColor ldc;
+			//Setup light diffuse color
+			GXColor ldc;
 			ldc.r = gxlightdiffusecolor[lightcounter].r * 0xFF;
 			ldc.g = gxlightdiffusecolor[lightcounter].g * 0xFF;
 			ldc.b = gxlightdiffusecolor[lightcounter].b * 0xFF;
 			ldc.a = gxlightdiffusecolor[lightcounter].a * 0xFF;
 			GX_InitLightColor(&gxlight[lightcounter], ldc ); //move call to glend or init?;
-            GX_InitLightColor(&gxlight[lightcounter+4], ldc ); //move call to glend or init?;
+			GX_InitLightColor(&gxlight[lightcounter+4], ldc ); //move call to glend or init?;
 
 			//Setup light postion
 			
 			//check on w component when 1. light is positional
-			//                     when 0. light is directional at infinite pos
+			//					 when 0. light is directional at infinite pos
 			
 			guVector lpos;
 			guVector wpos;
-            lpos.x = gxlightpos[lightcounter].x;
-            lpos.y = gxlightpos[lightcounter].y;
-            lpos.z = gxlightpos[lightcounter].z;
-               
-               
-            if (gxlightpos[lightcounter].w == 0){
-                guVecNormalize(&lpos);
-                lpos.x *= BIG_NUMBER;
-                lpos.y *= BIG_NUMBER;
-                lpos.z *= BIG_NUMBER;
-            }
-            
+			lpos.x = gxlightpos[lightcounter].x;
+			lpos.y = gxlightpos[lightcounter].y;
+			lpos.z = gxlightpos[lightcounter].z;
+			   
+			   
+			if (gxlightpos[lightcounter].w == 0){
+				guVecNormalize(&lpos);
+				lpos.x *= BIG_NUMBER;
+				lpos.y *= BIG_NUMBER;
+				lpos.z *= BIG_NUMBER;
+			}
+			
 			guVecMultiply(view,&lpos,&wpos);	   //light position should be transformed by world-to-view matrix (thanks h0lyRS)
 			GX_InitLightPosv(&gxlight[lightcounter], &wpos); //feed corrected coord to light pos
 			GX_InitLightPosv(&gxlight[lightcounter+4], &wpos); //feed corrected coord to light pos
 		
 
 
-            //Setup light direction (when w is 1 dan dir = 0,0,0
-            guVector ldir;
-            if (gxlightpos[lightcounter].w==0){ 
-               //lpos.x = gxlightpos[lightcounter].x;
+			//Setup light direction (when w is 1 dan dir = 0,0,0
+			guVector ldir;
+			if (gxlightpos[lightcounter].w==0){ 
+			   //lpos.x = gxlightpos[lightcounter].x;
 			   //lpos.y = gxlightpos[lightcounter].y;
-               //lpos.z = gxlightpos[lightcounter].z;
-                                                
-               ldir.x = gxlightpos[lightcounter].x;
-               ldir.y = gxlightpos[lightcounter].y;
-               ldir.z = gxlightpos[lightcounter].z;
-            }
-            else
-            {
-                if (gxspotcutoff[lightcounter] != 180){ //if we have a spot light direction is needed
-                   ldir.x = gxspotdirection[lightcounter].x;
-                   ldir.y = gxspotdirection[lightcounter].y;
-                   ldir.z = gxspotdirection[lightcounter].z;
-                }
-                else { 
-                     ldir.x = 0;
-                     ldir.y = 0;
-                     ldir.z = -1;
-               }
-            }
-            
-            //guVecNormalize(&ldir);
-            //ldir.x *= BIG_NUMBER;
-            //ldir.y *= BIG_NUMBER;
-            //ldir.z *= BIG_NUMBER;
-            
-            guMtxInverse(view,mvi);
-            guMtxTranspose(mvi,view);
-            
-            guVecMultiply(view,&ldir,&ldir); //and direction should be transformed by inv-transposed of world-to-view (thanks h0lyRS)
-            
-            GX_InitLightDir(&gxlight[lightcounter], ldir.x, ldir.y, ldir.z); //feed corrected coord to light dir
-            GX_InitLightDir(&gxlight[lightcounter+4], ldir.x, ldir.y, ldir.z); //feed corrected coord to light dir
-           
-            
+			   //lpos.z = gxlightpos[lightcounter].z;
+												
+			   ldir.x = gxlightpos[lightcounter].x;
+			   ldir.y = gxlightpos[lightcounter].y;
+			   ldir.z = gxlightpos[lightcounter].z;
+			}
+			else
+			{
+				if (gxspotcutoff[lightcounter] != 180){ //if we have a spot light direction is needed
+				   ldir.x = gxspotdirection[lightcounter].x;
+				   ldir.y = gxspotdirection[lightcounter].y;
+				   ldir.z = gxspotdirection[lightcounter].z;
+				}
+				else { 
+					 ldir.x = 0;
+					 ldir.y = 0;
+					 ldir.z = -1;
+			   }
+			}
+			
+			//guVecNormalize(&ldir);
+			//ldir.x *= BIG_NUMBER;
+			//ldir.y *= BIG_NUMBER;
+			//ldir.z *= BIG_NUMBER;
+			
+			guMtxInverse(view,mvi);
+			guMtxTranspose(mvi,view);
+			
+			guVecMultiply(view,&ldir,&ldir); //and direction should be transformed by inv-transposed of world-to-view (thanks h0lyRS)
+			
+			GX_InitLightDir(&gxlight[lightcounter], ldir.x, ldir.y, ldir.z); //feed corrected coord to light dir
+			GX_InitLightDir(&gxlight[lightcounter+4], ldir.x, ldir.y, ldir.z); //feed corrected coord to light dir
+		   
+			
 			if (gxspotcutoff[lightcounter] != 180){
-               //Setup specular light (only for spotlight when GL_SPOT_CUTOFF <> 180)
+			   //Setup specular light (only for spotlight when GL_SPOT_CUTOFF <> 180)
 			   //make this line optional? If on it disturbs diffuse light?
-               guVector sdir;
-               sdir.x = gxspotdirection[lightcounter].x;
-               sdir.y = gxspotdirection[lightcounter].y;
-               sdir.z = gxspotdirection[lightcounter].z;
-               //guVecNormalize(&sdir);
-                     
-               //sdir.x *= BIG_NUMBER;
-               //sdir.y *= BIG_NUMBER;
-               //sdir.z *= BIG_NUMBER;       
-                              
+			   guVector sdir;
+			   sdir.x = gxspotdirection[lightcounter].x;
+			   sdir.y = gxspotdirection[lightcounter].y;
+			   sdir.z = gxspotdirection[lightcounter].z;
+			   //guVecNormalize(&sdir);
+					 
+			   //sdir.x *= BIG_NUMBER;
+			   //sdir.y *= BIG_NUMBER;
+			   //sdir.z *= BIG_NUMBER;	   
+							  
 			   guVecMultiply(view,&sdir,&sdir);
 			   
 			   guVector light_dir;
 			   guVecSub(&sdir, &lpos, &light_dir);
 			   
 			   GX_TestInitSpecularDir(&gxlight[lightcounter], light_dir.x, light_dir.y, light_dir.z); //needed to enable specular light
-               GX_TestInitSpecularDir(&gxlight[lightcounter+4], light_dir.x, light_dir.y, light_dir.z); //needed to enable specular light
-               
-            };
-            
-            
-            //this calls:
-            // #define GX_InitLightShininess(lobj, shininess) (GX_InitLightAttn(lobj, 0.0F, 0.0F, 1.0F, (shininess)/2.0F, 0.0F, 1.0F-(shininess)/2.0F ))
+			   GX_TestInitSpecularDir(&gxlight[lightcounter+4], light_dir.x, light_dir.y, light_dir.z); //needed to enable specular light
+			   
+			};
+			
+			
+			//this calls:
+			// #define GX_InitLightShininess(lobj, shininess) (GX_InitLightAttn(lobj, 0.0F, 0.0F, 1.0F, (shininess)/2.0F, 0.0F, 1.0F-(shininess)/2.0F ))
 
-            //Setup distance attinuation (opengl vs gx differences?)
+			//Setup distance attinuation (opengl vs gx differences?)
 			//GX_InitLightDistAttn(&gxlight[lightcounter], 100.0f, gxspotexponent[lightcounter], GX_DA_GENTLE); //gxspotexponent was 0.5f
-                                                     //ref_dist, bright, dist func  
-            //k0 = 1.0;                   
-            //k1 = 0.5f*(1.0f-ref_brite)/(ref_brite*ref_dist);
- 			//k2 = 0.5f*(1.0f-ref_brite)/(ref_brite*ref_dist*ref_dist); or 0.0f;                  
-                    
-                    
-                     
-            //Attenuation factor = 1 / (kc + kl*d + kq*d2) 
-            //kc = constant attenuation factor (default = 1.0) 
-            //kl = linear attenuation factor (default = 0.0) 
-            //kq = quadratic attenuation factor (default = 0.0) 
-         
-            float distance = BIG_NUMBER; //either distance of light or falloff factor
-            float factor = 1 / (gxconstantattanuation[lightcounter] + gxlinearattanuation[lightcounter]*distance + gxquadraticattanuation[lightcounter]*distance*distance);                   
-             
-            //float factor = 5.0; 
-             
-            //k0 - 0;                            
-       		//k1 = 0.5f*(1.0f-ref_brite)/(ref_brite*ref_dist);
- 			//k2 = 0.5f*(1.0f-ref_brite)/(ref_brite*ref_dist*ref_dist);                            
+													 //ref_dist, bright, dist func  
+			//k0 = 1.0;				   
+			//k1 = 0.5f*(1.0f-ref_brite)/(ref_brite*ref_dist);
+ 			//k2 = 0.5f*(1.0f-ref_brite)/(ref_brite*ref_dist*ref_dist); or 0.0f;				  
+					
+					
+					 
+			//Attenuation factor = 1 / (kc + kl*d + kq*d2) 
+			//kc = constant attenuation factor (default = 1.0) 
+			//kl = linear attenuation factor (default = 0.0) 
+			//kq = quadratic attenuation factor (default = 0.0) 
+		 
+			float distance = BIG_NUMBER; //either distance of light or falloff factor
+			float factor = 1 / (gxconstantattanuation[lightcounter] + gxlinearattanuation[lightcounter]*distance + gxquadraticattanuation[lightcounter]*distance*distance);				   
+			 
+			//float factor = 5.0; 
+			 
+			//k0 - 0;							
+	   		//k1 = 0.5f*(1.0f-ref_brite)/(ref_brite*ref_dist);
+ 			//k2 = 0.5f*(1.0f-ref_brite)/(ref_brite*ref_dist*ref_dist);							
 
-/*                           
-            GX_InitLightAttn(&gxlight[lightcounter], 
-                                                     1.0, //filled by initlightspot
-                                                     0.0, //filled by initlightspot
-                                                     0.0, //filled by initlightspot
-                                                     gxconstantattanuation[lightcounter], 
-                                                     gxlinearattanuation[lightcounter]*distance, 
-                                                     gxquadraticattanuation[lightcounter]*distance*distance
-                                                     
-                                                     ) ;
-                                                   //  k0              k1   , k2                    
-*/                           
-                                                     
-            //GX_InitLightAttnK(&gxlight[lightcounter],  (gxcurrentmaterialshininess)/2.0F , 0.0F ,1.0F-(gxcurrentmaterialshininess)/2.0F);
-            
-             
-                     
-            
-            GX_InitLightDistAttn(&gxlight[lightcounter], factor ,1.0, GX_DA_STEEP); //gxspotexponent[lightcounter] GX_DA_GENTLE
-            GX_InitLightDistAttn(&gxlight[lightcounter+4], factor ,1.0, GX_DA_STEEP); //gxspotexponent[lightcounter] GX_DA_GENTLE
+/*						   
+			GX_InitLightAttn(&gxlight[lightcounter], 
+													 1.0, //filled by initlightspot
+													 0.0, //filled by initlightspot
+													 0.0, //filled by initlightspot
+													 gxconstantattanuation[lightcounter], 
+													 gxlinearattanuation[lightcounter]*distance, 
+													 gxquadraticattanuation[lightcounter]*distance*distance
+													 
+													 ) ;
+												   //  k0			  k1   , k2					
+*/						   
+													 
+			//GX_InitLightAttnK(&gxlight[lightcounter],  (gxcurrentmaterialshininess)/2.0F , 0.0F ,1.0F-(gxcurrentmaterialshininess)/2.0F);
+			
+			 
+					 
+			
+			GX_InitLightDistAttn(&gxlight[lightcounter], factor ,1.0, GX_DA_STEEP); //gxspotexponent[lightcounter] GX_DA_GENTLE
+			GX_InitLightDistAttn(&gxlight[lightcounter+4], factor ,1.0, GX_DA_STEEP); //gxspotexponent[lightcounter] GX_DA_GENTLE
 
-            
-                                                         //ref_dist //ref_brite
-            //                                           factor / strenght
-//1.0 is //    glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 10.0f); ??
-                                                     
-                                                           
-            //Setup light type (normal/spotlight)
-            //0-90 / 255-0
-            
-            
-                                                //cut_off, spot func
-            //GX_InitLightSpot(&gxlight[lightcounter], 0.0f, GX_SP_OFF); //not this is not a spot light
-            
-            //GX_InitLightShininess(&gxlight[lightcounter], gxcurrentmaterialshininess); // /180?
-            
-            //float testspot = 90 - ((gxcurrentmaterialshininess * 90) / 128); //thanks ector 90 - (x * 90 / 255) 
-            //if (gxcurrentmaterialshininess == 0){
-            //   testspot = 90;
-            //}
-            //zid 255-gxcurrentmaterialshininess/(255/90);
-            
-            //setup specular highlight
-            //GX_InitLightSpot(&gxlight[lightcounter], testspot, GX_SP_COS); //not this is not a spot light (gxspotcutoff[lightcounter])
-            
-            //setup normal spotlight
-            GX_InitLightSpot(&gxlight[lightcounter], gxspotcutoff[lightcounter], GX_SP_RING1); //not this is not a spot light ()
-            GX_InitLightSpot(&gxlight[1], gxspotcutoff[lightcounter], GX_SP_RING1); //not this is not a spot light ()
-            
-            if ( gxcurrentmaterialshininess != 0 ) {
-                 //if (gxspotcutoff[lightcounter] != 180) {
-                    GX_TestInitLightShininess(&gxlight[lightcounter+4], gxcurrentmaterialshininess);
-                 //}
-            };
+			
+														 //ref_dist //ref_brite
+			//										   factor / strenght
+//1.0 is //	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 10.0f); ??
+													 
+														   
+			//Setup light type (normal/spotlight)
+			//0-90 / 255-0
+			
+			
+												//cut_off, spot func
+			//GX_InitLightSpot(&gxlight[lightcounter], 0.0f, GX_SP_OFF); //not this is not a spot light
+			
+			//GX_InitLightShininess(&gxlight[lightcounter], gxcurrentmaterialshininess); // /180?
+			
+			//float testspot = 90 - ((gxcurrentmaterialshininess * 90) / 128); //thanks ector 90 - (x * 90 / 255) 
+			//if (gxcurrentmaterialshininess == 0){
+			//   testspot = 90;
+			//}
+			//zid 255-gxcurrentmaterialshininess/(255/90);
+			
+			//setup specular highlight
+			//GX_InitLightSpot(&gxlight[lightcounter], testspot, GX_SP_COS); //not this is not a spot light (gxspotcutoff[lightcounter])
+			
+			//setup normal spotlight
+			GX_InitLightSpot(&gxlight[lightcounter], gxspotcutoff[lightcounter], GX_SP_RING1); //not this is not a spot light ()
+			GX_InitLightSpot(&gxlight[1], gxspotcutoff[lightcounter], GX_SP_RING1); //not this is not a spot light ()
+			
+			if ( gxcurrentmaterialshininess != 0 ) {
+				 //if (gxspotcutoff[lightcounter] != 180) {
+					GX_TestInitLightShininess(&gxlight[lightcounter+4], gxcurrentmaterialshininess);
+				 //}
+			};
 
 			//Load the light up
 			switch (lightcounter){
 				case 0: 
-                     GX_LoadLightObj(&gxlight[lightcounter], GX_LIGHT0);
-                     GX_LoadLightObj(&gxlight[lightcounter+4], GX_LIGHT4);  
-                     break;
+					 GX_LoadLightObj(&gxlight[lightcounter], GX_LIGHT0);
+					 GX_LoadLightObj(&gxlight[lightcounter+4], GX_LIGHT4);  
+					 break;
 				case 1: 
-                     GX_LoadLightObj(&gxlight[lightcounter], GX_LIGHT1);
-                     GX_LoadLightObj(&gxlight[lightcounter+4], GX_LIGHT5); 
-                     break;
+					 GX_LoadLightObj(&gxlight[lightcounter], GX_LIGHT1);
+					 GX_LoadLightObj(&gxlight[lightcounter+4], GX_LIGHT5); 
+					 break;
 				case 2: 
-                     GX_LoadLightObj(&gxlight[lightcounter], GX_LIGHT2); 
-                     GX_LoadLightObj(&gxlight[lightcounter+4], GX_LIGHT6);
-                     break;
+					 GX_LoadLightObj(&gxlight[lightcounter], GX_LIGHT2); 
+					 GX_LoadLightObj(&gxlight[lightcounter+4], GX_LIGHT6);
+					 break;
 				case 3: 
-                     GX_LoadLightObj(&gxlight[lightcounter], GX_LIGHT3); 
-                     GX_LoadLightObj(&gxlight[lightcounter+4], GX_LIGHT7);
-                     break;
+					 GX_LoadLightObj(&gxlight[lightcounter], GX_LIGHT3); 
+					 GX_LoadLightObj(&gxlight[lightcounter+4], GX_LIGHT7);
+					 break;
 //				case 4: GX_LoadLightObj(&gxlight[lightcounter], GX_LIGHT4); break;
 //				case 5: GX_LoadLightObj(&gxlight[lightcounter], GX_LIGHT5); break;
 //				case 6: GX_LoadLightObj(&gxlight[lightcounter], GX_LIGHT6); break;
@@ -635,19 +635,19 @@ void glEnd(void) {
 	
 	int countelements = _numelements*2;
 	if (gxcullfaceanabled==true){
-       countelements = _numelements;
-    }
+	   countelements = _numelements;
+	}
 	
 	GX_Begin(_type, GX_VTXFMT0, countelements); //dependend on culling setting
 	int i =0;
-                                //default
+								//default
 //order dependend on glFrontFace(GL_CCW); 
 //or GL_CW //	for( i=0; i<_numelements; i++)
 
 //GX_TRIANGLESTRIP   GL_TRIANGLE_STRIP
-//0 1 2			     0 1 2
-//1 3 2			     2 1 3
-//2 3 4			     2 3 4
+//0 1 2				 0 1 2
+//1 3 2				 2 1 3
+//2 3 4				 2 3 4
 //better think of a clever swapping routine
 //maybe then no need to invert normal for trianglestrip anymore
 
@@ -669,28 +669,28 @@ bool ccw = true;
 
 if(gxcullfaceanabled==true){
    cw = false;
-   ccw = false;                            
+   ccw = false;							
    switch(gxwinding){
-      case GL_CW: cw = true; break;
-      case GL_CCW: ccw = true; break;
-   }                         
+	  case GL_CW: cw = true; break;
+	  case GL_CCW: ccw = true; break;
+   }						 
 }
 
-    if (cw==true){ 
-       //CW     
-       for( i=_numelements-1; i>=0; i--)
-       {
-            UploadVertex(i);    	
-       }
-    }
-    
-    if (ccw==true){
-       //CCW
-       for( i=0; i<_numelements; i++)
-       {
-            UploadVertex(i);    	
-       }
-    }
+	if (cw==true){ 
+	   //CW	 
+	   for( i=_numelements-1; i>=0; i--)
+	   {
+			UploadVertex(i);		
+	   }
+	}
+	
+	if (ccw==true){
+	   //CCW
+	   for( i=0; i<_numelements; i++)
+	   {
+			UploadVertex(i);		
+	   }
+	}
 
 
 	GX_End();
@@ -754,7 +754,7 @@ void glLightf( GLenum light, GLenum pname, GLfloat param ){
 		case GL_CONSTANT_ATTENUATION: gxconstantattanuation[lightNum] = param; break;
 		case GL_LINEAR_ATTENUATION: gxlinearattanuation[lightNum] = param; break;
 		case GL_QUADRATIC_ATTENUATION: gxquadraticattanuation[lightNum] = param; break;
-    };
+	};
 };
 
 void glLightfv( GLenum light, GLenum pname, const GLfloat *params ){
@@ -805,11 +805,11 @@ void glLightfv( GLenum light, GLenum pname, const GLfloat *params ){
 			gxlightspecularcolor[lightNum].a = params[3];
 			break;
 		case GL_SPOT_DIRECTION:
-             gxspotdirection[lightNum].x = params[0];
-             gxspotdirection[lightNum].y = params[1];
-             gxspotdirection[lightNum].z = params[2];
-             gxspotdirection[lightNum].w = params[3];
-             break;
+			 gxspotdirection[lightNum].x = params[0];
+			 gxspotdirection[lightNum].y = params[1];
+			 gxspotdirection[lightNum].z = params[2];
+			 gxspotdirection[lightNum].w = params[3];
+			 break;
 	};
 };
 
@@ -819,7 +819,7 @@ void glMaterialf( GLenum face, GLenum pname, GLfloat param ){
 	switch(pname)
 	{
 		case GL_SHININESS: 
-             gxcurrentmaterialshininess = param; break;
+			 gxcurrentmaterialshininess = param; break;
 	}
 };
 
@@ -851,7 +851,7 @@ void glMaterialfv( GLenum face, GLenum pname, const GLfloat *params ){
 			gxcurrentmaterialspecularcolor.a = params[3];
 		break;
 		case GL_SHININESS: 
-             gxcurrentmaterialshininess = params[0]; break;
+			 gxcurrentmaterialshininess = params[0]; break;
 	}
 };
 
@@ -870,9 +870,9 @@ void glBindTexture( GLenum target, GLuint texture ){
 };
 
 void glTexImage2D( GLenum target, GLint level,
-                                    GLint internalFormat,
-                                    GLsizei width, GLsizei height,
-                                    GLint border, GLenum format, GLenum type,
+									GLint internalFormat,
+									GLsizei width, GLsizei height,
+									GLint border, GLenum format, GLenum type,
 									const GLvoid *pixels ){
 	//glTexImage2D(GL_TEXTURE_2D, 0, 3, crate0tex.width, crate0tex.height, 0, GL_RGB, GL_UNSIGNED_BYTE, crate0tex.tex_data);
 	GX_InitTexObj(&gxtextures[curtexture], (void*)pixels, width,height,6,1,1,GX_FALSE); //6 = colfmt make it dynamic
@@ -981,14 +981,14 @@ void glEnable(GLenum type){
 					}
 				};
 
-//                gxlightmask |= (GX_LIGHT0 << 0);
-//                gxlightmaskspec |= (GX_LIGHT0 << 1);
+//				gxlightmask |= (GX_LIGHT0 << 0);
+//				gxlightmaskspec |= (GX_LIGHT0 << 1);
 
 
-                //Setup light system/channels
+				//Setup light system/channels
 				GX_SetNumChans(2); //dependend on if there is a specular color/effect needed
 
-				//channel 1 (ambient + diffuse)                          
+				//channel 1 (ambient + diffuse)						  
 				GX_SetChanCtrl(GX_COLOR0A0,GX_TRUE,GX_SRC_REG,GX_SRC_REG,gxlightmask,GX_DF_CLAMP,GX_AF_SPOT);
 				
 				//channel 2 (specular)
@@ -1000,10 +1000,10 @@ void glEnable(GLenum type){
 				//Setup the number of tev stages needed
 				int numtevstages = 0;
 				if (tex2denabled){ 
-                  numtevstages = 5;
-                } else {
-                  numtevstages = 4;
-                }
+				  numtevstages = 5;
+				} else {
+				  numtevstages = 4;
+				}
 				GX_SetNumTevStages(numtevstages); //each extra color takes another stage?
 				
 				
@@ -1063,14 +1063,14 @@ void glEnable(GLenum type){
 
 		GX_SetTevColorOp(GX_TEVSTAGE3, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE, GX_TEVPREV);
 		//GX_SetTevColorIn(GX_TEVSTAGE3, GX_CC_CPREV, GX_CC_ZERO, GX_CC_ZERO, GX_CC_RASC);
-       // GX_SetTevColorIn(GX_TEVSTAGE3,GX_CC_ZERO,GX_CC_RASC,GX_CC_CPREV,GX_CC_ZERO);
+	   // GX_SetTevColorIn(GX_TEVSTAGE3,GX_CC_ZERO,GX_CC_RASC,GX_CC_CPREV,GX_CC_ZERO);
 GX_SetTevColorIn(GX_TEVSTAGE3,GX_CC_ZERO,GX_CC_RASC,GX_CC_ONE,GX_CC_CPREV);
 
 		
 		// alpha - nop
 		GX_SetTevAlphaOp(GX_TEVSTAGE3, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_ENABLE, GX_TEVPREV);
 		//GX_SetTevAlphaIn(GX_TEVSTAGE3, GX_CA_APREV, GX_CA_ZERO, GX_CA_ZERO, GX_CA_RASA); //shagkur method
-        GX_SetTevAlphaIn(GX_TEVSTAGE3,GX_CA_ZERO,GX_CA_RASA,GX_CA_APREV,GX_CA_ZERO);
+		GX_SetTevAlphaIn(GX_TEVSTAGE3,GX_CA_ZERO,GX_CA_RASA,GX_CA_APREV,GX_CA_ZERO);
 
 		GX_SetTevOrder(GX_TEVSTAGE3, GX_TEXCOORDNULL, GX_TEXMAP_NULL, GX_COLOR1A1);
 		
@@ -1078,15 +1078,15 @@ GX_SetTevColorIn(GX_TEVSTAGE3,GX_CC_ZERO,GX_CC_RASC,GX_CC_ONE,GX_CC_CPREV);
 				// end stage 4
 				
 				if (tex2denabled){ 
-                                   
-                    // stage 5 (textures)
+								   
+					// stage 5 (textures)
 				
-				    GX_SetTevOrder(GX_TEVSTAGE4, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0); //use texture
-				    GX_SetTevOp(GX_TEVSTAGE4, GX_MODULATE); //blend with previous stage
+					GX_SetTevOrder(GX_TEVSTAGE4, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0); //use texture
+					GX_SetTevOp(GX_TEVSTAGE4, GX_MODULATE); //blend with previous stage
 
-                    // end stage 5
+					// end stage 5
 
-                }   
+				}   
 
 				break;
 			case GL_TEXTURE_2D:
@@ -1117,13 +1117,13 @@ void glDisable(GLenum type){
 				if (tex2denabled){
 				  GX_SetNumTexGens(1); //multitexturing so set to 1 for now
 				  GX_SetTevOp(GX_TEVSTAGE0,GX_REPLACE);
-				  GX_SetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0);                
-                }
-                else
-                {
+				  GX_SetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0);				
+				}
+				else
+				{
 				 GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
 				 GX_SetChanCtrl(GX_COLOR0A0,GX_DISABLE,GX_SRC_REG,GX_SRC_VTX,GX_LIGHTNULL,GX_DF_NONE,GX_AF_NONE);
-                }
+				}
 				break;
 			case GL_TEXTURE_2D:
 				tex2denabled = false;
@@ -1159,7 +1159,7 @@ GLboolean glIsEnabled(GLenum type){
 			case GL_LIGHT7: return gxlightenabled[7];
 			case GL_CULL_FACE: return gxcullfaceanabled;
 		};
-        return false;//If invalid, return false
+		return false;//If invalid, return false
 }
 
 /* Depth Buffer */
