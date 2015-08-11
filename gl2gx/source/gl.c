@@ -225,6 +225,27 @@ void glColor3f( GLfloat r, GLfloat g, GLfloat b ){
                 (GLubyte) ( 255.0 * b ) );
 }
 
+//Vector glColor functions
+
+void glColor3bv( const GLbyte *v ) { glColor3b( v[0], v[1], v[2] ); }
+void glColor3dv( const GLdouble *v ) { glColor3d( v[0], v[1], v[2] ); }
+void glColor3fv( const GLfloat *v ) { glColor3f( v[0], v[1], v[2] ); }
+void glColor3iv( const GLint *v ) { glColor3i( v[0], v[1], v[2] ); }
+void glColor3sv( const GLshort *v ) { glColor3s( v[0], v[1], v[2] ); }
+void glColor3ubv( const GLubyte *v ) { glColor3ub( v[0], v[1], v[2] ); }
+void glColor3uiv( const GLuint *v ) { glColor3ui( v[0], v[1], v[2] ); }
+void glColor3usv( const GLushort *v ) { glColor3us( v[0], v[1], v[2] ); }
+
+void glColor4bv( const GLbyte *v ) { glColor4b( v[0], v[1], v[2] , v[3] ); }
+void glColor4dv( const GLdouble *v ) { glColor4d( v[0], v[1], v[2] , v[3] ); }
+void glColor4fv( const GLfloat *v ) { glColor4f( v[0], v[1], v[2] , v[3] ); }
+void glColor4iv( const GLint *v ) { glColor4i( v[0], v[1], v[2] , v[3] ); }
+void glColor4sv( const GLshort *v ) { glColor4s( v[0], v[1], v[2] , v[3] ); }
+void glColor4ubv( const GLubyte *v ) { glColor4ub( v[0], v[1], v[2] , v[3] ); }
+void glColor4uiv( const GLuint *v ) { glColor4ui( v[0], v[1], v[2] , v[3] ); }
+void glColor4usv( const GLushort *v ) { glColor4us( v[0], v[1], v[2] , v[3] ); }
+
+
 /* glTexCoord */
 
 void glTexCoord2f( GLfloat s, GLfloat t ){
