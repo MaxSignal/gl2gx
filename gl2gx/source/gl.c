@@ -245,7 +245,6 @@ void glColor4ubv( const GLubyte *v ) { glColor4ub( v[0], v[1], v[2] , v[3] ); }
 void glColor4uiv( const GLuint *v ) { glColor4ui( v[0], v[1], v[2] , v[3] ); }
 void glColor4usv( const GLushort *v ) { glColor4us( v[0], v[1], v[2] , v[3] ); }
 
-
 /* glTexCoord */
 
 void glTexCoord2f( GLfloat s, GLfloat t ){
@@ -254,16 +253,31 @@ void glTexCoord2f( GLfloat s, GLfloat t ){
 };
 
 void glTexCoord2fv( const GLfloat *v ) {
-    glTexCoord2f(v[0], v[1]);
+    glTexCoord2f( v[0], v[1] );
 };
 
 void glTexCoord1f( GLfloat s ){
-	_temptexcoordelement.s = s;
-	_temptexcoordelement.t = 0.0f;
+	glTexCoord2f( s, 0.0f );
 };
 
 void glTexCoord1fv( const GLfloat *v ) {
-    glTexCoord2f(v[0], 0.0f);
+    glTexCoord2f( v[0], 0.0f );
+};
+
+void glTexCoord2d( GLdouble s, GLdouble t ){
+	glTexCoord2f( (GLfloat) s, (GLfloat) t );
+};
+
+void glTexCoord2dv( const GLdouble *v ) {
+    glTexCoord2f( (GLfloat) v[0], (GLfloat) v[1] );
+};
+
+void glTexCoord1d( GLdouble s ){
+	glTexCoord2f( (GLfloat) s, 0.0f );
+};
+
+void glTexCoord1dv( const GLdouble *v ) {
+    glTexCoord2f( (GLfloat) v[0], 0.0f );
 };
 
 /* functions */
