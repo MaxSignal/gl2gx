@@ -1,0 +1,25 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Get devkitppc installer
+      run: wget https://apt.devkitpro.org/install-devkitpro-pacman
+    - name: Give permission to installer
+      run: chmod +x ./install-devkitpro-pacman
+    - name: Install devkitppc
+      run: sudo ./install-devkitpro-pacman
+      
+    - name: build gl2gx
+      run: make wii-release
