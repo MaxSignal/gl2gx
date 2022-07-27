@@ -21,7 +21,7 @@ jobs:
     - name: Install devkitpro-pacman
       run: sudo ./install-devkitpro-pacman
     - name: Install devkitppc
-      run: sudo dkp-pacman -S wii-dev
+      run: sudo dkp-pacman -S wii-dev devkitppc
       
     - name: build gl2gx
       run: make wii-release
