@@ -14,12 +14,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Get devkitppc installer
+    - name: Get devkitpro-pacman installer
       run: wget https://apt.devkitpro.org/install-devkitpro-pacman
     - name: Give permission to installer
       run: chmod +x ./install-devkitpro-pacman
-    - name: Install devkitppc
+    - name: Install devkitpro-pacman
       run: sudo ./install-devkitpro-pacman
+    - name: Install devkitppc
+      run: sudo dkp-pacman -S wii-dev
       
     - name: build gl2gx
       run: make wii-release
